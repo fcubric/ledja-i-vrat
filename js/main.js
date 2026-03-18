@@ -54,44 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     window.addEventListener('scroll', updateActiveNav, { passive: true });
 
-    // --- Testimonial slider ---
-    const testimonialCards = document.querySelectorAll('.testimonial-card');
-    const dots = document.querySelectorAll('.dot');
-    let currentTestimonial = 0;
-    let autoSlideTimer;
-
-    const showTestimonial = (index) => {
-        testimonialCards.forEach((card, i) => {
-            card.classList.toggle('active', i === index);
-        });
-        dots.forEach((dot, i) => {
-            dot.classList.toggle('active', i === index);
-        });
-        currentTestimonial = index;
-    };
-
-    dots.forEach(dot => {
-        dot.addEventListener('click', () => {
-            const index = parseInt(dot.getAttribute('data-index'), 10);
-            showTestimonial(index);
-            resetAutoSlide();
-        });
-    });
-
-    const autoSlide = () => {
-        const next = (currentTestimonial + 1) % testimonialCards.length;
-        showTestimonial(next);
-    };
-
-    const resetAutoSlide = () => {
-        clearInterval(autoSlideTimer);
-        autoSlideTimer = setInterval(autoSlide, 5000);
-    };
-
-    if (testimonialCards.length > 0) {
-        resetAutoSlide();
-    }
-
     // --- Scroll reveal ---
     const addRevealClasses = () => {
         const revealTargets = [
@@ -104,7 +66,9 @@ document.addEventListener('DOMContentLoaded', () => {
             '.about-quote',
             '.service-card',
             '.approach-step',
-            '.testimonials-slider',
+            '.testimonials-grid',
+            '.testimonial-card',
+            '.rating-badge',
             '.gallery-item',
             '.instagram-embed-wrapper',
             '.instagram-cta',
@@ -118,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll(selector).forEach((el, i) => {
                 el.classList.add('reveal');
                 // Stagger service cards and gallery items
-                if (selector === '.service-card' || selector === '.gallery-item' || selector === '.approach-step') {
+                if (selector === '.service-card' || selector === '.gallery-item' || selector === '.approach-step' || selector === '.testimonial-card') {
                     const delay = Math.min(i % 3, 3);
                     if (delay > 0) el.classList.add('reveal-delay-' + delay);
                 }

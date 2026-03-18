@@ -16,9 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const navMenu = document.getElementById('navMenu');
 
     navToggle.addEventListener('click', () => {
+        const isOpen = navMenu.classList.toggle('active');
         navToggle.classList.toggle('active');
-        navMenu.classList.toggle('active');
-        document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        navbar.classList.toggle('menu-open', isOpen);
+        document.body.style.overflow = isOpen ? 'hidden' : '';
     });
 
     // Close mobile menu on link click
@@ -26,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', () => {
             navToggle.classList.remove('active');
             navMenu.classList.remove('active');
+            navbar.classList.remove('menu-open');
             document.body.style.overflow = '';
         });
     });

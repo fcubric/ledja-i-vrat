@@ -561,10 +561,10 @@ h1, h2, h3, p {
 }
 
 .about-credentials {
-    margin-top: 32px;
+    margin-top: 24px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
 }
 
 .credential {
@@ -1349,10 +1349,6 @@ h1, h2, h3, p {
 
     .about-image-secondary {
         margin-top: 0;
-    }
-
-    .about-credentials {
-        grid-column: span 2;
     }
 
     .approach-grid {

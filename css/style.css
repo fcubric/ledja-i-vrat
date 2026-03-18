@@ -743,8 +743,10 @@ h1, h2, h3, p {
 
 .testimonials-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: 24px;
+    max-width: 640px;
+    margin: 0 auto;
 }
 
 .testimonial-card {
@@ -806,6 +808,24 @@ h1, h2, h3, p {
 .testimonial-author span {
     font-size: 0.8rem;
     color: var(--color-text-muted);
+}
+
+.testimonials-note {
+    text-align: center;
+    margin-top: 32px;
+    font-size: 0.95rem;
+    color: var(--color-text-light);
+}
+
+.testimonials-note a {
+    color: var(--color-primary);
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.testimonials-note a:hover {
+    color: var(--color-primary-dark);
 }
 
 /* ============================================

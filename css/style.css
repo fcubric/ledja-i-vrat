@@ -1287,16 +1287,14 @@ h1, h2, h3, p {
         gap: 4px;
         padding: 80px 24px 40px;
         opacity: 0;
-        visibility: hidden;
-        transform: translateY(-10px);
-        transition: all 0.3s ease;
+        pointer-events: none;
+        transition: opacity 0.25s ease;
         overflow-y: auto;
     }
 
     .nav-menu.active {
         opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
+        pointer-events: auto;
     }
 
     .nav-menu li {

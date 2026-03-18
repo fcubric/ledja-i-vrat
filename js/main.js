@@ -15,21 +15,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const navToggle = document.getElementById('navToggle');
     const navMenu = document.getElementById('navMenu');
 
+    const openMenu = () => {
+        navMenu.classList.add('active');
+        navToggle.classList.add('active');
+        navbar.classList.add('menu-open');
+        document.body.style.overflow = 'hidden';
+    };
+
+    const closeMenu = () => {
+        navMenu.classList.remove('active');
+        navToggle.classList.remove('active');
+        navbar.classList.remove('menu-open');
+        document.body.style.overflow = '';
+    };
+
     navToggle.addEventListener('click', () => {
-        const isOpen = navMenu.classList.toggle('active');
-        navToggle.classList.toggle('active');
-        navbar.classList.toggle('menu-open', isOpen);
-        document.body.style.overflow = isOpen ? 'hidden' : '';
+        if (navMenu.classList.contains('active')) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
     });
 
     // Close mobile menu on link click
     navMenu.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            navToggle.classList.remove('active');
-            navMenu.classList.remove('active');
-            navbar.classList.remove('menu-open');
-            document.body.style.overflow = '';
-        });
+        link.addEventListener('click', () => closeMenu());
     });
 
     // --- Active nav link on scroll ---

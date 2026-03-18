@@ -216,7 +216,7 @@ h1, h2, h3, p {
     right: 0;
     z-index: 1000;
     padding: 20px 0;
-    transition: all var(--transition-normal);
+    transition: padding 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
 }
 
 .navbar.scrolled {
@@ -227,7 +227,7 @@ h1, h2, h3, p {
     box-shadow: 0 2px 20px rgba(0,0,0,0.06);
 }
 
-/* Kill scrolled bg when mobile menu is open */
+/* When menu is open, navbar bar becomes transparent */
 .navbar.menu-open {
     background: transparent !important;
     backdrop-filter: none !important;
@@ -255,14 +255,15 @@ h1, h2, h3, p {
     align-items: baseline;
     gap: 6px;
     font-family: var(--font-heading);
-    z-index: 1001;
+    z-index: 1002;
+    position: relative;
 }
 
 .logo-ledja {
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--color-white);
-    transition: color var(--transition-normal);
+    transition: color 0.3s ease;
 }
 
 .logo-amp {
@@ -275,7 +276,7 @@ h1, h2, h3, p {
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--color-white);
-    transition: color var(--transition-normal);
+    transition: color 0.3s ease;
 }
 
 .navbar.scrolled .logo-ledja,
@@ -295,7 +296,7 @@ h1, h2, h3, p {
     font-weight: 400;
     color: rgba(255,255,255,0.8);
     border-radius: 50px;
-    transition: all var(--transition-fast);
+    transition: color 0.2s ease;
 }
 
 .nav-link:hover,
@@ -321,7 +322,6 @@ h1, h2, h3, p {
 }
 .nav-cta:hover {
     background: var(--color-primary-dark) !important;
-    transform: translateY(-1px);
 }
 
 /* Hamburger */
@@ -332,18 +332,19 @@ h1, h2, h3, p {
     background: none;
     border: none;
     cursor: pointer;
-    z-index: 1001;
-    padding: 8px;
+    z-index: 1002;
+    position: relative;
+    padding: 10px;
     -webkit-tap-highlight-color: transparent;
 }
 
 .nav-toggle span {
     display: block;
-    width: 24px;
+    width: 22px;
     height: 2px;
     background: var(--color-white);
     border-radius: 2px;
-    transition: all var(--transition-normal);
+    transition: transform 0.3s ease, opacity 0.2s ease;
 }
 
 .navbar.scrolled .nav-toggle span {
@@ -358,6 +359,11 @@ h1, h2, h3, p {
 }
 .nav-toggle.active span:nth-child(3) {
     transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Mobile menu overlay — separate from navbar */
+.nav-overlay {
+    display: none;
 }
 
 /* ============================================
@@ -1275,26 +1281,21 @@ h1, h2, h3, p {
         position: fixed;
         top: 0;
         left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 1000;
-        background: rgba(26, 35, 50, 0.98);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
+        width: 100%;
+        height: 100%;
+        z-index: 1001;
+        background: #1A2332;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 4px;
-        padding: 80px 24px 40px;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.25s ease;
+        gap: 2px;
+        padding: 70px 24px 40px;
         overflow-y: auto;
+        display: none;
     }
 
     .nav-menu.active {
-        opacity: 1;
-        pointer-events: auto;
+        display: flex;
     }
 
     .nav-menu li {
@@ -1305,17 +1306,16 @@ h1, h2, h3, p {
 
     .nav-menu .nav-link {
         display: block;
-        color: rgba(255,255,255,0.75);
+        color: rgba(255,255,255,0.8);
         font-size: 1.1rem;
-        padding: 14px 20px;
+        padding: 13px 20px;
         border-radius: var(--radius-sm);
-        transition: all var(--transition-fast);
     }
 
     .nav-menu .nav-link:hover,
     .nav-menu .nav-link.active {
-        color: var(--color-white);
-        background: rgba(255,255,255,0.08);
+        color: #fff;
+        background: rgba(255,255,255,0.1);
     }
 
     .nav-cta {
@@ -1325,14 +1325,14 @@ h1, h2, h3, p {
         border-radius: 50px !important;
     }
 
-    /* Fix scrolled nav colors in mobile overlay */
+    /* Override scrolled styles inside mobile menu */
     .navbar.scrolled .nav-menu .nav-link {
-        color: rgba(255,255,255,0.75);
+        color: rgba(255,255,255,0.8);
     }
     .navbar.scrolled .nav-menu .nav-link:hover,
     .navbar.scrolled .nav-menu .nav-link.active {
-        color: var(--color-white);
-        background: rgba(255,255,255,0.08);
+        color: #fff;
+        background: rgba(255,255,255,0.1);
     }
 
     /* === LAYOUT === */

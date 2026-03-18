@@ -59,6 +59,7 @@ html {
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    scroll-padding-top: 80px;
 }
 
 body {
@@ -314,7 +315,8 @@ h1, h2, h3, p {
     border: none;
     cursor: pointer;
     z-index: 1001;
-    padding: 4px;
+    padding: 8px;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .nav-toggle span {
@@ -1306,49 +1308,82 @@ h1, h2, h3, p {
 
     .nav-menu {
         position: fixed;
-        inset: 0;
-        background: rgba(26, 35, 50, 0.97);
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1000;
+        background: rgba(26, 35, 50, 0.98);
         backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
         flex-direction: column;
         justify-content: center;
-        gap: 8px;
+        align-items: center;
+        gap: 4px;
+        padding: 80px 24px 40px;
         opacity: 0;
         visibility: hidden;
-        transition: all var(--transition-normal);
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+        overflow-y: auto;
     }
 
     .nav-menu.active {
         opacity: 1;
         visibility: visible;
+        transform: translateY(0);
+    }
+
+    .nav-menu li {
+        width: 100%;
+        max-width: 280px;
+        text-align: center;
     }
 
     .nav-menu .nav-link {
-        color: rgba(255,255,255,0.7);
-        font-size: 1.2rem;
-        padding: 12px 24px;
+        display: block;
+        color: rgba(255,255,255,0.75);
+        font-size: 1.1rem;
+        padding: 14px 20px;
+        border-radius: var(--radius-sm);
+        transition: all var(--transition-fast);
     }
 
     .nav-menu .nav-link:hover,
     .nav-menu .nav-link.active {
         color: var(--color-white);
+        background: rgba(255,255,255,0.08);
     }
 
     .nav-cta {
-        margin-left: 0;
-        margin-top: 16px;
+        margin-left: 0 !important;
+        margin-top: 12px;
+        background: var(--color-primary) !important;
+        border-radius: 50px !important;
     }
 
-    /* Fix scrolled nav colors in mobile overlay */
-    .navbar.scrolled .nav-menu .nav-link {
-        color: rgba(255,255,255,0.7);
+    /* Hamburger always visible on dark bg when menu open */
+    .nav-toggle.active span {
+        background: var(--color-white) !important;
     }
-    .navbar.scrolled .nav-menu .nav-link:hover {
+
+    /* Fix scrolled nav colors — keep white in mobile overlay */
+    .navbar.scrolled .nav-menu .nav-link {
+        color: rgba(255,255,255,0.75);
+    }
+    .navbar.scrolled .nav-menu .nav-link:hover,
+    .navbar.scrolled .nav-menu .nav-link.active {
         color: var(--color-white);
+        background: rgba(255,255,255,0.08);
     }
 
     /* Hero mobile */
     .hero-content {
         padding: 120px 0 80px;
+    }
+
+    .hero-subtitle br {
+        display: none;
     }
 
     .hero-actions {
@@ -1362,14 +1397,42 @@ h1, h2, h3, p {
         justify-content: center;
     }
 
+    .hero-scroll {
+        display: none;
+    }
+
     /* Services grid */
     .services-grid {
         grid-template-columns: 1fr;
-        gap: 16px;
+        gap: 12px;
     }
 
     .service-card {
-        padding: 28px 24px;
+        padding: 24px 20px;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .service-card:hover {
+        transform: none;
+    }
+
+    .service-icon {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        margin-bottom: 0;
+    }
+
+    .service-title {
+        font-size: 1.05rem;
+        margin-bottom: 4px;
+    }
+
+    .service-desc {
+        font-size: 0.88rem;
     }
 
     /* Testimonials */
@@ -1418,6 +1481,16 @@ h1, h2, h3, p {
 
     .cta-actions {
         justify-content: center;
+        width: 100%;
+    }
+
+    .cta-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .cta-band {
+        padding: 60px 0;
     }
 
     /* Form */
@@ -1460,6 +1533,29 @@ h1, h2, h3, p {
     .step-number {
         font-size: 2rem;
         min-width: 44px;
+    }
+
+    /* Contact */
+    .contact-map iframe {
+        height: 280px;
+    }
+
+    .contact-intro {
+        font-size: 0.95rem;
+    }
+
+    .rating-badge {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .rating-text {
+        font-size: 0.8rem;
+    }
+
+    /* Section spacing */
+    .section-header {
+        margin-bottom: 48px;
     }
 }
 
